@@ -1,0 +1,57 @@
+version: 2
+
+sources:
+  - name: raw
+    schema: main
+    tables:
+      - name: raw_crypto_prices
+        description: "Raw hourly price data from CoinGecko API"
+        columns:
+          - name: timestamp
+            tests:
+              - not_null
+          - name: price
+            tests:
+              - not_null
+          - name: coin_id
+            tests:
+              - not_null
+          - name: vs_currency
+            tests:
+              - not_null
+
+models:
+  - name: stg_crypto_prices
+    description: "Cleaned and validated crypto prices"
+    columns:
+      - name: timestamp
+        tests:
+          - not_null
+      - name: price_date
+        tests:
+          - not_null
+      - name: is_invalid_price
+        tests:
+          - not_null
+
+  - name: daily_candlesticks
+    description: "Daily OHLC candlestick data per coin"
+    columns:
+      - name: price_date
+        tests:
+          - not_null
+      - name: coin_id
+        tests:
+          - not_null
+      - name: higher
+        tests:
+          - not_null
+      - name: lower
+        tests:
+          - not_null
+      - name: open
+        tests:
+          - not_null
+      - name: close
+        tests:
+          - not_null
