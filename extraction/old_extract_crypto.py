@@ -1,7 +1,7 @@
-from datetime import datetime, timedelta
+# from datetime import datetime, timedelta
 
-import airbyte as ab
-import duckdb
+# import airbyte as ab
+# import duckdb
 
 
 # def extract_crypto_data(
