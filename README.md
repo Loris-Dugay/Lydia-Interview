@@ -52,6 +52,9 @@ Both the extraction layer and the transform layer are idempotent:
 # Install dependencies and generate dbt manifest (required for Dagster)
 make install
 
+# Activate venv
+source .venv/bin/activate
+
 # Run the pipeline with orchestrator, open http://localhost:3000 to access Dagster UI
 make orchestration
 
