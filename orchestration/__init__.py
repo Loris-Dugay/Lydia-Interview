@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 
 from dagster import Definitions
@@ -15,6 +16,9 @@ PROJECT_ROOT = Path(__file__).parent.parent
 DBT_PROJECT_DIR = PROJECT_ROOT / "dbt_project" / "crypto_pipeline"
 DB_PATH = str(PROJECT_ROOT / "data" / "crypto.duckdb")
 
+# Set absolute DB path so dbt resolves it correctly regardless of working directory
+os.environ["DBT_DB_PATH"] = DB_PATH
+
 defs = Definitions(
     assets=[raw_crypto_prices, crypto_dbt_assets, candlestick_chart],
     jobs=[crypto_pipeline_job],
@@ -25,9 +29,6 @@ defs = Definitions(
         "dbt": DbtCliResource(
             project_dir=str(DBT_PROJECT_DIR),
             profiles_dir=str(DBT_PROJECT_DIR.parent),
-            dbt_executable="dbt",
-            global_config_flags=[],
-            env={"DBT_DB_PATH": DB_PATH},
         ),
     },
 )
