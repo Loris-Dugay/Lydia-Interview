@@ -15,6 +15,7 @@ help:
 
 install:
 	uv sync
+	uv run dbt compile --project-dir dbt_project/crypto_pipeline --profiles-dir dbt_project
 
 extract:
 	uv run python extraction/extract_crypto.py

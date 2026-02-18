@@ -49,7 +49,7 @@ Both the extraction layer and the transform layer are idempotent:
 
 ## Setup
 ```bash
-# Install dependencies
+# Install dependencies and generate dbt manifest (required for Dagster)
 make install
 
 # Run the pipeline with orchestrator, open http://localhost:3000 to access Dagster UI
